@@ -13,32 +13,39 @@ module wheel_border() {
     
     translate([18, 0, 0])
     difference() {
-        cube([2, 6, 7]);
+        cube([2, 6, 7.5]);
 
-        translate([0, 3, 3])
+        translate([0, 3, 3.5])
         rotate([0, 90, 0])
         cylinder(1, 3, 1.6);
         
-        translate([1, 3, 3])
+        translate([1, 3, 3.5])
         rotate([0, 90, 0])
         cylinder(1, 1.6, 3);
     }
     
-    translate([3, 1.5, 6.5])
-    cube([15, 3, 0.5]);
+    translate([18, 1.5, 7.5])
+    rotate([0, 176, 0])
+    cube([17, 3, 1]);
     
-    translate([3, 1.5, 5])
-    cube([1, 3, 2]);
+    translate([0, 1, 0])
+    rotate([90, 0, 0])
+    linear_extrude(1)
+    polygon([[0, 9], [0, 10], [18, 7.5], [18, 6.5]]);
     
+    translate([0, 6, 0])
+    rotate([90, 0, 0])
+    linear_extrude(1)
+    polygon([[0, 9], [0, 10], [18, 7.5], [18, 6.5]]);
 };
 
 module wheel_axis() {
     $fn = 100;
 
-    translate([-20, 3, 3])
+    translate([-15, 3, 3.5])
     rotate([0, 90, 0])
     difference() {
-        cylinder(50, 1.5, 1.5);
+        cylinder(35, 1.5, 1.5);
         
         translate([0.5, 0.5, -1])
         cube([1, 1, 6]);
@@ -53,11 +60,11 @@ module wheel_axis() {
         cube([1, 1, 6]);
     }
     
-    translate([18, 3, 3])
+    translate([18, 3, 3.5])
     rotate([0, 90, 0])
     cylinder(1, 2, 1.5);
     
-    translate([19, 3, 3])
+    translate([19, 3, 3.5])
     rotate([0, 90, 0])
     cylinder(1, 1.5, 2);
     
