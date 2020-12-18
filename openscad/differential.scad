@@ -1,27 +1,17 @@
-use <utils.scad> 
+use <utils.scad>
 use <axis_back.scad>
-
-module axis_gears() {
-    translate([7, 0, 9])
-    rotate([22.5, 0, 0])
-    rotate([0, 90, 0])
-    gear(8, 8, 2, 2);
-    
-    translate([-9, 0, 9])
-    rotate([22.5, 0, 0])
-    rotate([0, 90, 0])
-    gear(8, 8, 2, 2);
-}
+use <transmission.scad>
 
 module gears() {
     difference() {
         union() {
+            translate([0, 0, -8.5])
             gear(8, 8, 2, 2);
 
-            translate([0, 0, 16])
+            translate([0, 0, 6.5])
             gear(8, 8, 2, 2);
         }
-        translate([0, 0, 0])
+        translate([0, 0, -1])
         cylinder(30, 2, 2);
     }
     
@@ -29,60 +19,48 @@ module gears() {
 
 module spinning_gears() {
     difference() {
-        union() {
-            translate([-2, -1.5, -4])
-            cube([15, 3, 3]);
-                        
-            translate([-2, -1.5, 19])
-            cube([15, 3, 3]);
-
-            translate([13, 0, 9])
-            rotate([0, 90, 0])
-            gear(16, 16, 3, 2);
-        }
-        
-        translate([0, 0, 9])
+        translate([10.5, 0, 0])
+        rotate([0, 90, 0])
+        gear(12, 15, 3, 2);
+    
+        translate([0, 0, 0])
         rotate([0, 90, 0])
         cylinder(40, 3.1, 3.1);
     }
     
-    translate([1.9, -1.5, 0])
-    cube([0.1, 3, 20]);
+    translate([0, 1.5, 5.5])
+    rotate([90, 0, 0])
+    linear_extrude(3)
+    polygon([
+        [1.15, 0], [1.15, 3], [5, 3], [5.5, 3.5], [9, 3.5],
+        [11, 1.5], [11, 6], [-5, 6], [-5, 3], [-1.15, 3], [-1.15, 0]
+    ]);
     
-    translate([-2, -1.5, -1])
-    cube([4, 3, 1]);
+    rotate([180, 0, 0])
+    translate([0, 1.5, 5.5])
+    rotate([90, 0, 0])
+    linear_extrude(3)
+    polygon([
+        [1.15, 0], [1.15, 3], [5, 3], [5.5, 3.5], [9, 3.5],
+        [11, 1.5], [11, 6], [-5, 6], [-5, 3], [-1.15, 3], [-1.15, 0]
+    ]);
     
-    translate([-2, -1.5, -1])
-    cube([4, 3, 1]);
-    
-    translate([-2, -1.5, 18])
-    cube([4, 3, 1]);
-    
-    w = 2.23;
-    
-    translate([-w / 2, -1.5, 0])
-    cube([w, 3, 3.5]);
-
-    translate([-w / 2, -1.5, 14.5])
-    cube([w, 3, 3.5]);
-
-    
-    translate([w / 2 - 0.1, -1.5, 0])
-    cube([0.1, 3, 20]);
+    translate([1.05 - 0.1, -1.5, -9])
+    cube([0.2, 3, 20]);
 }
 
 module gears_holder() {
     difference() {
-        translate([0, 0, 2.25])
-        cylinder(13.5, 3.5, 3.5);
+        translate([0, 0, -6.25])
+        cylinder(12.5, 3.5, 3.5);
         
-        w = 2.4;
+        w = 3;
     
-        translate([-w / 2, -1.6, 0])
-        cube([w, 3.2, 3.5]);
+        translate([-w / 2, -2, -7.5])
+        cube([w, 4, 2]);
         
-        translate([-w / 2, -1.6, 14.5])
-        cube([w, 3.2, 3.5]);
+        translate([-w / 2, -2, 5])
+        cube([w, 4, 2]);
     }
 }
 
@@ -90,17 +68,24 @@ $fn = 100;
 
 module differential_assembled() {   
     gears();
-    axis_gears();
     spinning_gears();
     gears_holder();
     
-    translate([9, 0, 9])
-    %back_axis();
+    translate([6.5, 0, 0])
+    %axis_assembled();
 
     rotate([0, 0, 180])
-    translate([9, 0, 9])
-    %back_axis();
-
+    translate([6.5, 0, 0])
+    %axis_assembled();
+    
+    translate([0, 14, 0])
+    rotate([0, 360 / 16, 0])
+    rotate([0, 0, 90])
+    %transmission_assembled();
 }
 
 differential_assembled();
+
+//printing parts
+gears_holder();
+spinning_gears();

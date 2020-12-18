@@ -3,69 +3,91 @@ use <utils.scad>
 $fn = 100;
 
 module _lock(h) {
-    translate([0, 0, h])
-    cylinder(1, 3, 4);
+    difference() {
+        translate([0, 0, h])
+        cylinder(2, 5, 5);
+        
+        translate([0, 0, h])
+        cylinder(1, 2, 2);
+        
+        translate([0, 0, h + 1])
+        cylinder(1, 2, 3);
+    }
+}
+
+module _plus_axis(r, w, h) {
+    translate([w/2, w/2, 0])
+    cube([r, r, h]);
     
-    translate([0, 0, h+1])
-    cylinder(1, 4, 4);
+    translate([-w/2 - r, w/2, 0])
+    cube([r, r, h]);
+ 
+    translate([-w/2 - r, -w/2 - r, 0])
+    cube([r, r, h]);
     
-    translate([0, 0, h+4])
-    cylinder(1, 3, 4);
-    
-    translate([0, 0, h+5])
-    cylinder(1, 4, 4);
+    translate([w/2, -w/2 - r, 0])
+    cube([r, r, h]);
+}
+
+module _plus_gear(r, w, h) {
+    difference() {
+        cylinder(h, r, r);
+        
+        translate([w/2, w/2, -1])
+        cube([r, r, h]);
+        
+        translate([-w/2 - r, w/2, -1])
+        cube([r, r, h]);
+        
+        translate([-w/2 - r, -w/2 - r, -1])
+        cube([r, r, h]);
+        
+        translate([w/2, -w/2 - r, -1])
+        cube([r, r, h]);
+    }
 }
 
 module back_axis() {
     rotate([0, 90, 0])
-    difference() {
-        union() {
-            cylinder(45, 3, 3);
+    intersection() {
+        difference() {
+            union() {
+                cylinder(27, 3, 3);
+                
+                translate([0, 0, 3])
+                cylinder(1, 4, 4);
+                
+                cylinder(4, 4, 4);
+                
+            }
             
-            translate([0, 0, 2])
-            cylinder(1, 3, 4);
-
-            translate([0, 0, 3])
-            cylinder(1, 4, 4);
+            translate([0, 0, -0.5])
+            _plus_axis(4, 2, 3);
             
             _lock(9);
-            _lock(30);
+            _lock(17);
+            
+            translate([0, 0, 21.5])
+            _plus_axis(3, 2, 6);
         }
-        
-        translate([1, 1, -1])
-        cube([3, 3, 3]);
-        
-        translate([-4, 1, -1])
-        cube([3, 3, 3]);
-        
-        translate([-4, -4, -1])
-        cube([3, 3, 3]);
-        
-        translate([1, -4, -1])
-        cube([3, 3, 3]);
     }
 }
 
-module axis_gear() {
+module diff_gear() {
     difference() {
         gear(8, 8, 2, 2);
         
         translate([0, 0, -1])
-        difference() {
-            cylinder(4, 3, 3);
-            
-            translate([1, 1, -1])
-            cube([2, 2, 5]);
-            
-            translate([1, -3, -1])
-            cube([2, 2, 5]);
+        _plus_gear(4, 2, 4);
+    }
+}
 
-            translate([-3, 1, -1])
-            cube([2, 2, 5]);
-            
-            translate([-3, -3, -1])
-            cube([2, 2, 5]);
-        }
+module wheel_gear() {
+    difference() {
+        gear(8, 10, 3, 3);
+        
+        translate([0, 0, -1])
+        _plus_gear(3, 2, 5);
     }
 }
 
@@ -75,8 +97,16 @@ module axis_assembled() {
         back_axis();
         
         rotate([0, 90, 0])
-        %axis_gear();
+        diff_gear();
+        
+        translate([22, 0, 0])
+        rotate([0, 90, 0])
+        wheel_gear();
     }
 }
+
+// printing parts
+back_axis();
+axis_gear();
 
 axis_assembled();
