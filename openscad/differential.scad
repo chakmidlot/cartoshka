@@ -1,31 +1,5 @@
-module gear(n, r, h, l) {
-    tooth_angle = 360 / n / 2;
-    
-    
-    for (i = [0: n]) {
-        rotate([0, 0, tooth_angle * i * 2])
-        union() {
-            linear_extrude(l)
-            polygon([
-                [0, 0],
-                [r, 0],
-                [r * cos(tooth_angle / 3), r * sin(tooth_angle / 3)],
-                [(r-h) * cos(2 * tooth_angle / 3), (r-h) * sin(2 * tooth_angle / 3)],
-                [(r-h) * cos(tooth_angle), (r-h) * sin(tooth_angle)]
-            ]);
-            
-            linear_extrude(l)
-            rotate([180, 0, 0])
-            polygon([
-                [0, 0],
-                [r, 0],
-                [r * cos(tooth_angle / 3), r * sin(tooth_angle / 3)],
-                [(r-h) * cos(2 * tooth_angle / 3), (r-h) * sin(2 * tooth_angle / 3)],
-                [(r-h) * cos(tooth_angle), (r-h) * sin(tooth_angle)]
-            ]);
-        }
-    }
-}
+use <utils.scad> 
+use <axis_back.scad>
 
 module axis_gears() {
     translate([7, 0, 9])
@@ -47,7 +21,7 @@ module gears() {
             translate([0, 0, 16])
             gear(8, 8, 2, 2);
         }
-        translate([0, 0, -1])
+        translate([0, 0, 0])
         cylinder(30, 2, 2);
     }
     
@@ -64,7 +38,7 @@ module spinning_gears() {
 
             translate([13, 0, 9])
             rotate([0, 90, 0])
-            gear(12, 16, 3, 2);
+            gear(16, 16, 3, 2);
         }
         
         translate([0, 0, 9])
@@ -114,11 +88,19 @@ module gears_holder() {
 
 $fn = 100;
 
-//gears();
-//axis_gears();
-spinning_gears();
-gears_holder();
+module differential_assembled() {   
+    gears();
+    axis_gears();
+    spinning_gears();
+    gears_holder();
+    
+    translate([9, 0, 9])
+    %back_axis();
 
+    rotate([0, 0, 180])
+    translate([9, 0, 9])
+    %back_axis();
 
+}
 
-
+differential_assembled();
