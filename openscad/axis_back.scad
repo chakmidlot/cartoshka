@@ -15,38 +15,6 @@ module _lock(h) {
     }
 }
 
-module _plus_axis(r, w, h) {
-    translate([w/2, w/2, 0])
-    cube([r, r, h]);
-    
-    translate([-w/2 - r, w/2, 0])
-    cube([r, r, h]);
- 
-    translate([-w/2 - r, -w/2 - r, 0])
-    cube([r, r, h]);
-    
-    translate([w/2, -w/2 - r, 0])
-    cube([r, r, h]);
-}
-
-module _plus_gear(r, w, h) {
-    difference() {
-        cylinder(h, r, r);
-        
-        translate([w/2, w/2, -1])
-        cube([r, r, h]);
-        
-        translate([-w/2 - r, w/2, -1])
-        cube([r, r, h]);
-        
-        translate([-w/2 - r, -w/2 - r, -1])
-        cube([r, r, h]);
-        
-        translate([w/2, -w/2 - r, -1])
-        cube([r, r, h]);
-    }
-}
-
 module back_axis() {
     rotate([0, 90, 0])
     intersection() {
@@ -84,7 +52,7 @@ module diff_gear() {
 
 module wheel_gear() {
     difference() {
-        gear(8, 10, 3, 3);
+        gear(7, 8, 2, 3);
         
         translate([0, 0, -1])
         _plus_gear(3, 2, 5);
