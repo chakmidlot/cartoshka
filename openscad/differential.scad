@@ -72,11 +72,11 @@ module differential_assembled() {
     gears_holder();
     
     translate([6.5, 0, 0])
-    %axis_assembled();
+    %left_axis_assembled();
 
     rotate([0, 0, 180])
     translate([6.5, 0, 0])
-    %axis_assembled();
+    %right_axis_assembled();
     
     translate([0, 14, 0])
     rotate([0, 360 / 16, 0])

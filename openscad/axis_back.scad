@@ -15,7 +15,7 @@ module _lock(h) {
     }
 }
 
-module back_axis() {
+module left_axis() {
     rotate([0, 90, 0])
     intersection() {
         difference() {
@@ -29,16 +29,23 @@ module back_axis() {
                 
             }
             
-            translate([0, 0, -0.5])
+            translate([0, 0, -1])
             _plus_axis(4, 2, 3);
             
-            _lock(9);
-            _lock(17);
+            _lock(8);
+            _lock(15);
             
             translate([0, 0, 21.5])
             _plus_axis(3, 2, 6);
         }
     }
+    
+    rotate([0, 90, 0])
+    diff_gear();
+}
+
+module right_axis() {
+    left_axis();
 }
 
 module diff_gear() {
@@ -59,13 +66,21 @@ module wheel_gear() {
     }
 }
 
-module axis_assembled() {
+module left_axis_assembled() {
     rotate([22.5, 0, 0])
     union() {
-        back_axis();
+        left_axis();
         
+        translate([22, 0, 0])
         rotate([0, 90, 0])
-        diff_gear();
+        wheel_gear();
+    }
+}
+
+module right_axis_assembled() {
+    rotate([22.5, 0, 0])
+    union() {
+        right_axis();
         
         translate([22, 0, 0])
         rotate([0, 90, 0])
@@ -74,7 +89,7 @@ module axis_assembled() {
 }
 
 // printing parts
-back_axis();
-axis_gear();
+left_axis();
 
-axis_assembled();
+
+//axis_assembled();

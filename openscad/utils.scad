@@ -9,8 +9,8 @@ module gear(n, r, h, l) {
             polygon([
                 [0, 0],
                 [r, 0],
-                [r * cos(tooth_angle * .23), r * sin(tooth_angle * .23)],
-                [(r-h) * cos(tooth_angle * .55), (r-h) * sin(tooth_angle * .55)],
+                [r * cos(tooth_angle * .15), r * sin(tooth_angle * .15)],
+                [(r-h) * cos(tooth_angle * .5), (r-h) * sin(tooth_angle * .5)],
                 [(r-h) * cos(tooth_angle), (r-h) * sin(tooth_angle)]
             ]);
             
@@ -19,8 +19,8 @@ module gear(n, r, h, l) {
             polygon([
                 [0, 0],
                 [r, 0],
-                [r * cos(tooth_angle * .23), r * sin(tooth_angle * .23)],
-                [(r-h) * cos(tooth_angle * .55), (r-h) * sin(tooth_angle * .55)],
+                [r * cos(tooth_angle * .15), r * sin(tooth_angle * .15)],
+                [(r-h) * cos(tooth_angle * .5), (r-h) * sin(tooth_angle * .5)],
                 [(r-h) * cos(tooth_angle), (r-h) * sin(tooth_angle)]
             ]);
         }
@@ -59,4 +59,4 @@ module _plus_gear(r, w, h) {
     }
 }
 
-gear(8, 10, 3, 2);
+gear(8, 10, 4, 2);
