@@ -1,6 +1,6 @@
-$fn = 100;
+use <front_wheel.scad>
 
-// trapezoid angle 63
+$fn = 100;
 
 module joint() {
     difference() {
@@ -72,7 +72,7 @@ module symmetry() {
         cylinder(5, 6, 6);
         
         translate([0, 0, -1])
-        cylinder(7, 3, 3);
+        cylinder(7, 3.2, 3.2);
     }
     
     translate([20, -1.5, -1])
@@ -105,5 +105,19 @@ module front_axis() {
     }
 }
 
+module front_axis_assembled() {
+    front_axis();
 
-front_axis();
+    %
+    translate([31, 0, 22])
+    rotate([0, 90, 0])
+    wheel_axis_assembled();
+
+
+    %
+    translate([-31, 0, 22])
+    rotate([0, -90, 0])
+    wheel_axis_assembled();
+}
+
+front_axis_assembled();
