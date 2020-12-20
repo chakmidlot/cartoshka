@@ -1,5 +1,7 @@
 $fn = 100;
 
+// trapezoid angle 63
+
 module joint() {
     difference() {
         cylinder(6, 5, 5);
@@ -26,7 +28,8 @@ module joint() {
 
     difference() {
         intersection() {
-            cube([7, 7, 6]);
+            linear_extrude(6)
+            polygon([[0, 0], [7, 2], [7, 7], [2, 7]]);
             cylinder(6, 7, 7);
         }
         
@@ -36,34 +39,44 @@ module joint() {
 }
 
 module symmetry() {
-    translate([19, 0, 0])
-    cube([30, 3, 3], true);
+    
+    translate([20, -1.5, 0])
+    cube([32, 3, 5], true);
     
     translate([0, 20, 0])
-    cube([68, 3, 3], true);
+    difference() {
+        cube([50, 3, 5], true);
+        
+        translate([0, 0, 2])
+        cube([20, 5, 4], true);
+    }
 
-    translate([40, 10, 0])
-    cube([3, 11, 3], true);
+    translate([35, 11, 0])
+    rotate([0, 0, 28])
+    cube([3, 11.5, 5], true);
     
-    translate([40, 0, 10])
-    cube([3, 3, 15], true);
+    translate([40, 0, 11])
+    cube([4, 5, 15], true);
     
-    translate([40, 20, -1.5])
-    rotate([0, 0, 110])
+    translate([31, 20, -2.5])
+    rotate([0, 0, 130])
     joint();
     
-    translate([40, 0, -1.5])
-    rotate([0, 0, 160])
+    translate([40, 0, -2.5])
+    rotate([0, 0, 55])
     joint();
     
-    translate([38.5, 0, 22])
+    translate([37.5, 0, 22])
     rotate([0, 90, 0])
     difference() {
-        cylinder(3, 5, 5);
+        cylinder(5, 6, 6);
         
         translate([0, 0, -1])
-        cylinder(5, 3, 3);
+        cylinder(7, 3, 3);
     }
+    
+    translate([20, -1.5, -1])
+    cube([4, 12, 3], true);
 }
 
 module front_axis() {
@@ -73,14 +86,14 @@ module front_axis() {
     symmetry();
 
     
-    translate([0, 0, -1.5])
+    translate([0, 0, -2.5])
     rotate([0, 0, 45])
     joint();
     
     translate([0, 20, 0])
     cylinder(6, 1.3, 1.3);
     
-    translate([-3, 6, -1.5])
+    translate([-3, 6, -2.5])
     difference() {
         cube([6, 30, 6]);
         
@@ -91,5 +104,6 @@ module front_axis() {
         cube([3, 15, 5]);
     }
 }
+
 
 front_axis();
