@@ -1,4 +1,5 @@
-use <utils.scad>
+use <utils.scad>;
+use <wheel.scad>;
 
 $fn = 100;
 
@@ -7,11 +8,18 @@ module wheel_axis() {
         cylinder(25, 3, 3);
         
         translate([0, 0, 19])
-        _plus_axis(3, 1, 7);
+        _plus_axis(3, 3, 7);
     }
     
     gear(7, 8, 2, 3);
     
 }
 
-wheel_axis();
+module wheel_axis_assembled() {
+    wheel_axis();
+    
+    translate([0, 0, 18])
+    wheel_assembled();
+}
+
+wheel_axis_assembled();

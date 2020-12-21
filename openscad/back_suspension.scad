@@ -199,11 +199,11 @@ module back_suspension_assembled() {
 
     translate([-28.5, 0, -14.5])
     rotate([0, -90, 0])
-    %wheel_axis();
+    %wheel_axis_assembled();
 
     translate([28.5, 0, -14.5])
     rotate([0, 90, 0])
-    %wheel_axis();
+    %wheel_axis_assembled();
     
     translate([20.5, -8, -6])
     axis_clip();
