@@ -67,6 +67,10 @@ module wheel_tunnel() {
             translate([0, -1, 13.5])
             cube([9, 3, 15]);
             
+            translate([9, 10, 9])
+            rotate([0, 90, 0])
+            cylinder(10, 7, 4);
+            
         }
         
         translate([7, 4, 19])
@@ -74,7 +78,7 @@ module wheel_tunnel() {
         
         translate([1, 10, 9])
         rotate([0, 90, 0])
-        cylinder(9, 3.1, 3.1);
+        cylinder(20, 3.1, 3.1);
         
         translate([2, 10, 25])
         rotate([0, 90, 0])
