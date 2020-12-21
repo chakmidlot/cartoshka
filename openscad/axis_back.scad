@@ -89,7 +89,7 @@ module right_axis_assembled() {
 }
 
 // printing parts
-left_axis();
+//left_axis();
+//wheel_gear();
 
-
-//axis_assembled();
+left_axis_assembled();

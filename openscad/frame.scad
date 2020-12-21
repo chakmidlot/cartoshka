@@ -80,7 +80,7 @@ union() {
     %
     translate([0, 100, 10.5])
     rotate([180, 0, 0])
-    front_axis();
+    front_axis_assembled();
     frame();
 }
 
