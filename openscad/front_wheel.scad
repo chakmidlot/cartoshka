@@ -1,7 +1,7 @@
 use <utils.scad>;
 use <wheel.scad>;
 
-$fn = 20;
+$fn = $preview ? 10 : 200;
 
 module wheel_axis() {
     difference() {

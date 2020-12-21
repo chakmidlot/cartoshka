@@ -2,7 +2,7 @@ use <differential.scad>;
 use <axis_back.scad>;
 use <back_wheel.scad>;
 
-$fn = 100;
+$fn = $preview ? 10 : 200;
 
 module stop_ring() {
     difference() {

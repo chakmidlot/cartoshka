@@ -64,7 +64,7 @@ module gears_holder() {
     }
 }
 
-$fn = 100;
+$fn = $preview ? 10 : 200;
 
 module differential_assembled() {   
     gears();

@@ -1,7 +1,7 @@
 use <back_suspension.scad>
 use <front_axis.scad>
 
-$fn = 100;
+$fn = $preview ? 10 : 200;
 
 module frame2() {
     difference() {

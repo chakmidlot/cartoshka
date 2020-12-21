@@ -1,6 +1,6 @@
 use <utils.scad> 
 
-$fn = 100;
+$fn = $preview ? 10 : 200;
 
 module _lock(h) {
     difference() {

@@ -1,6 +1,6 @@
 module wheel_border() {
-    $fn = 100;
-
+    $fn = $preview ? 10 : 200;
+    
     rotate([0, -90, 0])
     difference() {
         cube([15, 10, 2]);
@@ -53,8 +53,7 @@ module wheel_border() {
 };
 
 module wheel_axis() {
-    $fn = 100;
-
+    $fn = $preview ? 10 : 200;
     
     rotate([0, 90, 0])
     difference() {

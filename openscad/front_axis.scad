@@ -1,6 +1,6 @@
 use <front_wheel.scad>
 
-$fn = 100;
+$fn = $preview ? 10 : 200;
 
 module joint() {
     difference() {

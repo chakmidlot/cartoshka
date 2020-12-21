@@ -79,7 +79,7 @@ module spinning_gears() {
 
 }
 
-$fn = 100;
+$fn = $preview ? 10 : 200;
 
 //gears();
 axis_gears();
