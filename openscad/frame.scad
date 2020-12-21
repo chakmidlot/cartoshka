@@ -73,6 +73,7 @@ module frame() {
     ]);
 }
 
+rotate([0, 0, 180])
 union() {
     translate([0, 0, 3])
     %back_suspension_assembled();
