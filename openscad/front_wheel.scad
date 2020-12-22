@@ -16,10 +16,10 @@ module wheel_axis() {
     
     translate([0, 0, 11.5])
     difference() {
-        cylinder(12, 4, 4);
+        cylinder(14, 4, 4);
 
         translate([0, 0, 5])
-        _plus_axis(4, 3, 8);
+        _plus_axis(4, 3, 10);
     }
 }
 
@@ -49,7 +49,7 @@ module wheel_axis_assembled() {
     front_wheel_clip();
     
     translate([0, 0, 16])
-    wheel_assembled();
+    %wheel_assembled();
 }
 
 

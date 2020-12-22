@@ -137,6 +137,44 @@ module frame() {
     }
 }
 
+module back_axis_clip_left() {
+    translate([0, 31, 0]) {
+        rotate([90, 0, 0])
+        linear_extrude(3)
+        polygon([
+            [11.9,-1], [8.1, -1], [8.1, 2], [6, 15], [0, 15],
+            [0, 18], [10, 18], [11.9, 2]
+        ]);
+        
+        translate([0, -8, 15])
+        cube([10, 5, 3]); 
+        
+        translate([8.1, -8, -1])
+        cube([3.8, 6, 2.9]);
+        
+        translate([8.1, -8, 1.9])
+        cube([3.8, 0.8, 0.2]);
+        
+        translate([0, -6, 10])
+        difference() {
+            cube([5, 6, 5]); 
+            
+            translate([0, -1, -2])
+            rotate([-90, 0, 0])
+            cylinder(8, 6.2, 6.2);
+        }
+        
+        
+    }
+}
+
+module back_axis_clip() {
+    back_axis_clip_left();
+    
+    mirror([1, 0, 0])
+    back_axis_clip_left();
+}
+
 rotate([0, 0, 180])
 union() {
     translate([0, 0, 8])
@@ -152,7 +190,9 @@ union() {
     mirror([1, 0, 0])
     front_axis_holder();
     back_axis_holder();
+    
     frame();
+    back_axis_clip();
 }
 
 

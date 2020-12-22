@@ -18,7 +18,7 @@ module wheel() {
         }
         
         translate([0, 0, -1])
-        _plus_gear(4, 3, 9);
+        _plus_gear(4.2, 3.1, 9);
     }
 }
 
@@ -30,12 +30,12 @@ module tire() {
             for (i = [0: n]) {
                 rotate([0, 0, i * 360 / n])
                 translate([18, 0, 2.5])
-                cube([3, 4, 5], true);
+                cube([5, 4, 5], true);
             }
             for (i = [0: n]) {
                 rotate([0, 0, (i + 0.5) * 360 / n])
                 translate([18, 0, 7.5])
-                cube([3, 4, 5], true);
+                cube([5, 4, 5], true);
             }
             difference() {
                 cylinder(10, 18, 18);
