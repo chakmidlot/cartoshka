@@ -58,6 +58,9 @@ module symmetry() {
     translate([40, 0, 11])
     cube([4, 5, 15], true);
     
+    translate([40, 0, 3.5])
+    cylinder(3, 3.7, 5);
+
     translate([31, 20, -2.5])
     rotate([0, 0, 130])
     joint();
@@ -65,7 +68,7 @@ module symmetry() {
     translate([40, 0, -2.5])
     rotate([0, 0, 55])
     joint();
-    
+
     translate([37.5, 0, 22])
     rotate([0, 90, 0])
     difference() {
@@ -75,8 +78,8 @@ module symmetry() {
         cylinder(7, 3.2, 3.2);
     }
     
-    translate([20, -1.5, -1])
-    cube([4, 12, 3], true);
+    translate([20, -4, -1])
+    cube([4, 7, 3], true);
 }
 
 module front_axis() {
